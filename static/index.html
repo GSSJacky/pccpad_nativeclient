@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Pivotal Cloud Cache PAD demo by Native Client</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/demo.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.5.2/superagent.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div id="demo">
+		<div id="navbar">
+			<div id="title">Pivotal Cloud Cache PAD demo by Native Client</div>
+		</div>
+    
+
+    
+    
+		<div id="load_bar">
+			# of Customer to load <input id="load_num" type='text' />
+			<button id="load" class="btn btn-warning" onclick="move()">load</button>
+			<div id="loading_status"></div>
+			<div class="progress" style="display: none;">
+				<div class="progress-bar progress-bar-striped active" id="progress_bar"
+					role="progressbar" aria-valuemin="0"
+					aria-valuemax="100"></div>
+			</div>
+		</div><br/>
+
+		<div id="cache_stats" class="stats_box">Cache
+			<div id="cache_num" class="stats_num">0</div>
+			<button id="showcache" class="btn btn-success" onclick="showcache()">Show</button>
+			<button id="clearcache" class="btn btn-danger" onclick="clearcache()">Clear</button>
+		</div>
+		<div id="db_stats" class="stats_box">Database
+			<div id="db_num" class="stats_num">0</div>
+			<button id="showdb" class="btn btn-success" onclick="showdb()">Show</button>
+			<button id="cleardb" class="btn btn-danger" onclick="cleardb()">Clear</button>
+		</div>
+
+    <div><br/></div>
+
+
+    <div id="search_tool">
+			Search by customer Name<input id="search_content" type='text' placeholder="customer name search..."/>
+			<button id="search" class="btn btn-warning" onclick="search()">Look-aside Search</button>
+		</div>
+
+
+    
+    <div><br/></div>
+    
+    <div id="load_bar">
+		   <button id="listapi" class="btn btn-warning" onclick="listapi()"> List APIs </button>
+       <!--
+		   <button id="listapihide" class="btn btn-warning" onclick="listapihide()"> Hide </button>
+       -->
+		</div>
+		
+    <div><br/></div>
+    
+		<div id="db_customers"></div>
+	</div>
+	
+	<script>
+		function update_stats() {
+			superagent.get('/api/customer/countdb')
+			.then(function(res) {
+				$("#db_num").html(res.text);
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});
+			superagent.get('/api/customer/countcache')
+			.then(function(res) {
+				$("#cache_num").html(res.text);
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});
+		}
+	
+		update_stats();
+		
+		function search() {
+			superagent.get('/api/customer/lookasidesearch')
+			.query({ keyword: $("#search_content").val() })
+			.then(function(res) {
+				$("#search_content").val('');
+				$("#db_customers").html(res.text);
+				update_stats();
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});	
+		}
+	
+		function loaddb() {
+			superagent.get('/api/customer/loaddb')
+			.then(function(res) {
+				$("#db_customers").html(res.text);
+				update_stats();
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});	
+		}
+		
+		function showdb() {
+			superagent.get('/api/customer/showdb?count=0')
+			.then(function(res) {
+				$("#db_customers").html(res.text);
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});	
+		}
+		
+		function cleardb() {
+			$("#loading_status").show().html("Cleaning Database...");
+			superagent.get('/api/customer/cleardb')
+			.then(function(res) {
+				$("#db_customers").html("");
+				$("#loading_status").html("Cleaned.").fadeOut(3000);
+				update_stats();
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});	
+		}
+		
+		function showcache() {
+			superagent.get('/api/customer/showcache?count=0')
+			.then(function(res) {
+				$("#db_customers").html(res.text);
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});	
+		}
+		
+		function clearcache() {
+			superagent.get('/api/customer/clearcache')
+			.then(function(res) {
+				$("#db_customers").html(res.text);
+				update_stats();
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});	
+		}
+		
+		function load(n) {
+ 			var xmlHttp = new XMLHttpRequest();
+ 			xmlHttp.open( "GET", "/api/customer/bulkload?amount="+n, false );
+ 			xmlHttp.send( null );
+			$("#db_customers").html("");
+ 			update_stats();
+		}
+		
+		function move() {	
+			var BATCH_SIZE = 5000000;
+			$(".progress").show();
+			
+			if (!isNaN($("#load_num").val())) {
+				var load_num = $("#load_num").val();
+				$("#loading_status").show().html("Loading...");
+				$("#load_num").val('');
+				
+				var current = 0;
+				var elem = document.getElementById("progress_bar"); 
+			    var width = 0;
+			    var id = setInterval(frame, 5);
+			    
+			    function frame() {
+			        if (current >= load_num) {
+			            clearInterval(id);
+			            $("#loading_status").html("Loaded.").fadeOut(3000);
+			            elem.style.width = "0%";
+			            $(".progress").hide();
+			        } else {
+			        	var num_left = load_num - current;
+			        	var num_to_load = Math.min(num_left, BATCH_SIZE);
+			        	
+			        	load(num_to_load);
+			        	current += num_to_load;
+			        	
+			            elem.style.width = Math.round(current/load_num*100) + '%';
+			        }
+			    }
+				
+			} else {
+				$("#load_num").val('');
+				$("#loading_status").html("Invalid number... Please retry.");
+			}
+		}
+    
+    
+    function listapi() {
+			superagent.get('/api/customer/listapi')
+			.then(function(res) {
+				$("#db_customers").html(res.text);
+				$("#db_customers").show();
+		  	})
+		  	.catch(function (error) {
+		    	console.log(error);
+			});	
+		}
+		
+		
+		function listapihide() {
+			$("#db_customers").hide();
+		}
+		
+	</script>
+</body>
+
+</html>

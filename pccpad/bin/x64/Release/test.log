@@ -1,0 +1,66 @@
+---------------------------------------------------------------------------
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+---------------------------------------------------------------------------
+[config 2019/07/05 15:12:18.653027 Tokyo Standard Time WINADServerGSS:6592 1556] Using Geode Native Client Product Directory: C:/work/pcc/pccpad_nativeclient/pccpad/bin/x64/Release
+[config 2019/07/05 15:12:18.659299 Tokyo Standard Time WINADServerGSS:6592 1556] Product version: Pivotal GemFire Native 10.0.2-build.9 (64bit) 1970-01-01
+[config 2019/07/05 15:12:18.659308 Tokyo Standard Time WINADServerGSS:6592 1556] Source revision: 0000000000000000000000000000000000000000
+[config 2019/07/05 15:12:18.659315 Tokyo Standard Time WINADServerGSS:6592 1556] Source repository: <unspecified>
+[config 2019/07/05 15:12:18.659406 Tokyo Standard Time WINADServerGSS:6592 1556] Running on: SystemName=Win32 Machine=x64 6 Host=WINADServerGSS Release=Windows NT 6.2 Version=Build 9200 
+[config 2019/07/05 15:12:18.669305 Tokyo Standard Time WINADServerGSS:6592 1556] Current directory: C:\work\pcc\pccpad_nativeclient\pccpad\bin\x64\Release
+[config 2019/07/05 15:12:18.669343 Tokyo Standard Time WINADServerGSS:6592 1556] Current value of PATH: C:\work\installation\pivotal-gemfire-native102\bin;C:\work\demo\pivotal-gemfire-native-9.2.0-build.10-Windows-64bit\pivotal-gemfire-native\bin;C:\OpenSSL-Win32\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\downlevel;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\work\installation\CloudFoundry;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\
+[config 2019/07/05 15:12:18.669399 Tokyo Standard Time WINADServerGSS:6592 1556] Geode Native Client System Properties:
+  archive-disk-space-limit = 0
+  archive-file-size-limit = 0
+  auto-ready-for-events = true
+  bucket-wait-timeout = 0ms
+  cache-xml-file = 
+  conflate-events = server
+  connect-timeout = 59000ms
+  connection-pool-size = 5
+  connect-wait-timeout = 0ms
+  enable-chunk-handler-thread = false
+  disable-shuffling-of-endpoints = false
+  durable-client-id = 
+  durable-timeout = 300s
+  enable-time-statistics = false
+  heap-lru-delta = 10
+  heap-lru-limit = 0
+  log-disk-space-limit = 0
+  log-file = test.log
+  log-file-size-limit = 0
+  log-level = config
+  max-fe-threads = 2
+  max-socket-buffer-size = 66560
+  notify-ack-interval = 1000ms
+  notify-dupcheck-life = 300000ms
+  on-client-disconnect-clear-pdxType-Ids = false
+  ping-interval = 10s
+  redundancy-monitor-interval = 10s
+  security-client-dhalgo = 
+  security-client-kspath = 
+  ssl-enabled = false
+  ssl-keystore = 
+  ssl-truststore = 
+  statistic-archive-file = statArchive.gfs
+  statistic-sampling-enabled = true
+  statistic-sample-rate = 1000ms
+  suspended-tx-timeout = 30s
+  tombstone-timeout = 480000ms
+[config 2019/07/05 15:12:18.669418 Tokyo Standard Time WINADServerGSS:6592 1556] Starting the Geode Native Client
+[info 2019/07/05 15:12:18.669468 Tokyo Standard Time WINADServerGSS:6592 1556] Using Native_eacedffffb6592 as random data for ClientProxyMembershipID
+[config 2019/07/05 15:12:18.742610 Tokyo Standard Time WINADServerGSS:6592 1556] .NET layer assembly version: 10.0.2.9(v4.0.30319)
+[config 2019/07/05 15:12:18.742912 Tokyo Standard Time WINADServerGSS:6592 1556] .NET runtime version: 4.0.30319.42000 
+[config 2019/07/05 15:12:18.742955 Tokyo Standard Time WINADServerGSS:6592 1556] .NET AppDomain: 1 - pccpad.exe

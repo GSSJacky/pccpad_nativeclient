@@ -1,0 +1,11 @@
+---
+applications:
+- name: pccpad
+  path: ./pccpad/bin/x64/Release
+  memory: 500M
+  stack: windows2016
+  buildpacks:
+   - binary_buildpack
+  services:
+   - pcc-dev
+   - MysqlForNC
