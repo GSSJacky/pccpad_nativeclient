@@ -2,7 +2,7 @@
 
 This is C# application which demonstrates Look-Aside caching pattern and leverages Gemfire Native Client with Pivotal Cloud Cache(PCC) and Pivotal MySQL v2 instance.
 
-
+![PCCPadDemo Image](https://github.com/GSSJacky/pccpad_nativeclient/blob/master/pccpaddemo.png "PCCPadDemo Image")
 
 ## What does the service do?
 This is a service that requests customer information from a CloudFoundry hosted Customer Search service and caches them in PCC. You will then see that fetching the same customer information again eliminates the expensive call to retrieve customer information from MySQL.
