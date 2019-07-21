@@ -67,17 +67,17 @@ http://gemfire-native.docs.pivotal.io/100/gemfire-native-client/install-upgrade-
 
 ## How to run this demo
 
-Step1:
+*Step1:*
 
 Download this project to a local env and then unzip it into windows env which has installed vistual studio professional 2015 such as `[pccpad_path]`=`C:\work\pcc\pccpad_nativeclient`.
 
-Step2:
+*Step2:*
 
 From pcf app manager
 - create a pcc service such as name as `pcc-dev` and then create a service key such as name as `pcc-dev_service_key`. 
 - create a mysql service such as name as `MysqlForNC` and then create a service key such as name as `mysqlservicekey`.
 
-Step3:
+*Step3:*
 
 From Windows OS
 - Open pccpad.sln with visual studio professional 2015.
@@ -90,7 +90,8 @@ From Windows OS
 Since we are using binary buildpack, -c option is necessary to specify the custom start command.
 ```
 
-Step4:
+*Step4:*
+
 Logging into PCC cluster by gfsh with vcap env variable info which is recorded in service key=`pcc-dev_service_key`.
 
 ```
@@ -121,5 +122,6 @@ cacheserver-a47426d8-87a9-41c4-95b9-f4291160e41f | Region "/customer" created ..
 
 ```
 
-Step5:
+*Step5:*
+
 Open this app by `cf app pccpad`'s application URL.
