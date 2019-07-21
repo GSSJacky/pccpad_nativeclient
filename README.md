@@ -4,8 +4,11 @@ This is C# application which demonstrates Look-Aside caching pattern and leverag
 
 ![PCCPadDemo Image](https://github.com/GSSJacky/pccpad_nativeclient/blob/master/pccpaddemo.png "PCCPadDemo Image")
 
+![PCCPadDemo Architecture Image](https://github.com/GSSJacky/pccpad_nativeclient/blob/master/PCCPadDemoArchitecture.png "PCCPad Demo Architecture Image")
+
+
 ## What does the service do?
-This is a service that requests customer information from a CloudFoundry hosted Customer Search service and caches them in PCC. You will then see that fetching the same customer information again eliminates the expensive call to retrieve customer information from MySQL.
+This is a service that requests customer information from a CloudFoundry hosted Customer Search service and caches them in PCC. You will then see that fetching the same customer information again from cache which will eliminates the expensive call to retrieve customer information from MySQL.
 
 The Customer Search service has the following APIs:
 
