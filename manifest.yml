@@ -2,7 +2,7 @@
 applications:
 - name: pccpad
   path: ./pccpad/bin/x64/Release
-  memory: 500M
+  memory: 1000M
   stack: windows2016
   buildpacks:
    - binary_buildpack

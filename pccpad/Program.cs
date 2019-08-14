@@ -20,6 +20,7 @@ using System.Diagnostics;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 using System.Data;
+using System.Web;
 
 namespace pccpad
 {
@@ -130,7 +131,7 @@ namespace pccpad
             **/
 
             Cache cache = new CacheFactory()
-                .Set("log-level","config")
+                .Set("log-level","debug")
                 .Set("log-file","pccpad.log")
                 .SetAuthInitialize(
                 new UsernamePassword(
@@ -427,7 +428,7 @@ namespace pccpad
             {
                 //Console.WriteLine("-----in collecting customer cache");
                 Customer curCustomer = region[key];
-                if (curCustomer.Name.ToLower().StartsWith(strkeyword.ToLower()))
+                if (curCustomer.Name.ToLower().Contains(strkeyword.ToLower()))
                 {
                     result = result + " " + curCustomer.Id + ", " + curCustomer.Name + ", " + curCustomer.Email + ", " + curCustomer.TelephoneNumber + ", " + curCustomer.Address + "<br/>";
                     count++;
@@ -448,17 +449,21 @@ namespace pccpad
             Console.WriteLine("----listAPI------");
             String response = "";
             HttpResponseMessage httpresponse = new HttpResponseMessage();
+            //string path = HttpContext.Current.Request.Url.AbsolutePath;
+
+            //HttpContext.Current.Request.Url.Authority
+
 
             response = "Customer Search Service -- Available APIs: <br/>"
                     + "<br/>"
-                    + "GET <a href='./showcache?count=0'>/showcache?count={amount}</a>    	           - get all customer info in PCC<br/>"
-                    + "GET <a href='./clearcache'>/clearcache</a>                   - remove all customer info in PCC<br/>"
-                    + "GET <a href='./showdb?count=0'>/showdb?count={amount}</a>  	                   - get all customer info in MySQL<br/>"
-                    + "GET <a href='./cleardb'>/cleardb</a>                        - remove all customer info in MySQL<br/>"
-                    + "GET <a href='./bulkload?amount=100'>/loaddb?amount={amount}</a>         - load {amount} customer info into MySQL<br/>"
-                    + "GET <a href='./lookasidesearch?keyword=Jacky'>/lookasidesearch?keyword={Name}</a>   - get specific customer info by customer name and put entries into PCC<br/>"
-                     + "GET <a href='./countdb'>/countdb</a>                        - get count info from db<br/>"
-                    + "GET <a href='./countcache'>/countcache</a>                     - get count info from PCC<br/>";
+                    + "GET <a href='./api/customer/showcache?count=0'>/showcache?count={amount}</a>    	           - get all customer info in PCC<br/>"
+                    + "GET <a href='./api/customer/clearcache'>/clearcache</a>                   - remove all customer info in PCC<br/>"
+                    + "GET <a href='./api/customer/showdb?count=0'>/showdb?count={amount}</a>  	                   - get all customer info in MySQL<br/>"
+                    + "GET <a href='./api/customer/cleardb'>/cleardb</a>                        - remove all customer info in MySQL<br/>"
+                    + "GET <a href='./api/customer/bulkload?amount=100'>/loaddb?amount={amount}</a>         - load {amount} customer info into MySQL<br/>"
+                    + "GET <a href='./api/customer/lookasidesearch?keyword=Jacky'>/lookasidesearch?keyword={Name}</a>   - get specific customer info by customer name and put entries into PCC<br/>"
+                     + "GET <a href='./api/customer/countdb'>/countdb</a>                        - get count info from db<br/>"
+                    + "GET <a href='./api/customer/countcache'>/countcache</a>                     - get count info from PCC<br/>";
 
             httpresponse.Content = new StringContent(response);
             httpresponse.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
